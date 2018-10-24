@@ -1,0 +1,29 @@
+SQLPLUS / AS SYSDBA
+
+SET LINESIZE 3000
+SELECT TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS') FROM DUAL;
+
+--表領域作成
+CREATE TABLESPACE STUDY
+--◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-
+  DATAFILE 'C:\＜表領域ファイル格納場所を指定＞\oradata\orcl\STUDY.DBF' SIZE 100M
+--◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-◇-◆-
+  AUTOEXTEND ON NEXT 50M
+  SEGMENT SPACE MANAGEMENT AUTO
+;
+
+--同名ユーザ削除
+DROP USER STUDY CASCADE;
+
+--ユーザ作成
+CREATE USER STUDY
+  IDENTIFIED BY STUDY
+  DEFAULT TABLESPACE STUDY
+  TEMPORARY TABLESPACE TEMP
+;
+
+--権限付与
+GRANT DBA TO STUDY
+;
+
+DISCONNECT

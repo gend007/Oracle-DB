@@ -1,0 +1,31 @@
+CONN dicdic/Oracle12c@orcl
+host echo ===========================================
+select count(*) TM01_最終学位 from TM01_最終学位;
+host echo 期待値:7
+host echo ===========================================
+select count(*) TM02_学部 from TM02_学部;
+host echo 期待値:2
+host echo ===========================================
+select count(*) TM03_学科 from TM03_学科;
+host echo 期待値:18
+host echo ===========================================
+select count(*) TM04_在籍区分 from TM04_在籍区分;
+host echo 期待値:17
+host echo ===========================================
+select count(*) TM05_性別 from TM05_性別;
+host echo 期待値:2
+host echo ===========================================
+select count(*) TM06_血液型 from TM06_血液型;
+host echo 期待値:4
+host echo ===========================================
+select count(*) TM07_部活動 from TM07_部活動;
+host echo 期待値:95
+host echo ===========================================
+select count(*) TT01_学生 from TT01_学生;
+host echo 期待値:3429
+host echo ===========================================
+select count(*) TT02_所属部活動 from TT02_所属部活動;
+host echo 期待値:2208
+host echo ===========================================
+disc
+exit

@@ -1,0 +1,97 @@
+-- データベース管理者権限を持ったユーザーで接続
+CONNECT system/Kamemiya007@orcl
+
+-- ユーザーdicdicの作成
+DROP USER dicdic CASCADE;
+DROP ROLE dicdic_role CASCADE;
+CREATE USER dicdic  IDENTIFIED BY Oracle12c
+DEFAULT TABLESPACE USERS 
+TEMPORARY TABLESPACE TEMP
+QUOTA UNLIMITED ON USERS;
+
+-- dicdic_roleロールの作成
+CREATE ROLE dicdic_role;
+GRANT CREATE SESSION,
+      CREATE TABLE,
+      CREATE VIEW,
+      CREATE SEQUENCE,
+      CREATE SYNONYM
+TO dicdic_role;
+
+-- dicdic_roleロールをdicdicに付与
+GRANT dicdic_role TO dicdic;
+
+-- sysdbaを切断
+disc
+
+-- dicdicで接続
+CONN dicdic/Oracle12c@orcl
+
+-- テーブル「TM01_最終学位」作成
+CREATE TABLE TM01_最終学位
+  (学位コード     NUMBER(1) CONSTRAINT PK_TM01 PRIMARY KEY,
+   最終学位       VARCHAR2(20) NOT NULL
+  );
+
+-- テーブル「TM02_学部」作成
+CREATE TABLE TM02_学部
+  (学部コード     NUMBER(2) CONSTRAINT PK_TM02 PRIMARY KEY,
+   学部名         VARCHAR2(20) NOT NULL
+  );
+
+-- テーブル「TM03_学科」作成
+CREATE TABLE TM03_学科
+  (学科コード     NUMBER(4) CONSTRAINT PK_TM03 PRIMARY KEY,
+   学科名         VARCHAR2(40) NOT NULL,
+   学部コード     NUMBER(2) NOT NULL
+  );
+
+-- テーブル「TM04_在籍区分」作成
+CREATE TABLE TM04_在籍区分
+  (在籍区分コード  VARCHAR2(2) CONSTRAINT PK_TM04 PRIMARY KEY,
+   在籍区分        VARCHAR2(20) NOT NULL
+  );
+
+-- テーブル「TM05_性別」作成
+CREATE TABLE TM05_性別
+  (性別コード  NUMBER(1) CONSTRAINT PK_TM05 PRIMARY KEY,
+   性別    VARCHAR2(10) NOT NULL
+  );
+
+-- テーブル「TM06_血液型」作成
+CREATE TABLE TM06_血液型
+  (血液型コード   NUMBER(1) CONSTRAINT PK_TM06 PRIMARY KEY,
+   血液型         VARCHAR2(10) NOT NULL
+  );
+
+-- テーブル「TM07_部活動」作成
+CREATE TABLE TM07_部活動
+  (部活動コード   NUMBER(3) CONSTRAINT PK_TM07 PRIMARY KEY,
+   部活動         VARCHAR2(30) NOT NULL
+  );
+
+-- テーブル「TT01_学生」作成
+CREATE TABLE TT01_学生
+  (学生番号        CHAR(9) CONSTRAINT PK_TT01 PRIMARY KEY,
+   氏名            VARCHAR2(40) NOT NULL,
+   氏名カナ        VARCHAR2(80) NOT NULL,
+   氏名英字        VARCHAR2(160) NOT NULL,
+   性別            NUMBER(1) NOT NULL,
+   血液型          NUMBER(1) ,
+   学科コード      NUMBER(4) NOT NULL,
+   在籍区分コード  VARCHAR2(2) NOT NULL,
+   最終学歴コード  NUMBER(1) NOT NULL,
+   単位数          NUMBER(3) ,
+   TOEIC           NUMBER(4) ,
+   生年月日        NUMBER(8) NOT NULL
+  );
+                             
+-- テーブル「TT02_所属部活動」作成
+CREATE TABLE TT02_所属部活動
+  (学生番号        CHAR(9),
+   部活動コード    NUMBER(3)
+  );
+                             
+-- dicdicを切断
+disc
+exit
