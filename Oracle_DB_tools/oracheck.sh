@@ -15,3 +15,5 @@ if [ $count = 0 ]; then
 else
     echo "The process is alive."
 fi
+The process is alive."
+fi
