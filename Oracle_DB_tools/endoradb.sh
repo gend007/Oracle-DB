@@ -18,12 +18,6 @@ quit
 EOS
 
 
-# リスナー停止
-lsnrctl stop
-mmediate
-quit
-EOS
-
 
 # リスナー停止
 if [ $count != 0 ]; then
