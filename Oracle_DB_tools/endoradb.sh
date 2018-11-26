@@ -17,9 +17,3 @@ shutdown immediate
 quit
 EOS
 
-
-
-# リスナー停止
-if [ $count != 0 ]; then
-  lsnrctl stop
-fi

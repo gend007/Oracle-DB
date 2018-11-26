@@ -10,13 +10,10 @@ fi
 
 ## RMANi Backup実行
 
-rman <<EOF
-connect target /
+rman target / catalog rco/catalogdb@catadb <<EOF
 RUN {
  RECOVER COPY OF DATABASE WITH TAG daily_job;
- BACKUP INCREMENTAL LEVEL 1 FOR RECOVER OF COPY WITH TAG daily_job DATABASE PLUS ARCHIVELOG;
+ BACKUP INCREMENTAL LEVEL 1 FOR RECOVER OF COPY WITH TAG daily_job DATABASE;
 }
 exit
-EOF
-
 EOF

@@ -11,9 +11,7 @@ fi
 #count=`ps -ef | grep $ora_sid | grep -v grep | wc -l`
 count=`ps cax | grep $ora_sid | wc -l`
 if [ $count = 0 ]; then
-    echo "The process is dead."
+    echo "SID=$ora_sid The process is dead."
 else
-    echo "The process is alive."
-fi
-The process is alive."
+    echo "SID=$ora_sid The process is alive."
 fi
